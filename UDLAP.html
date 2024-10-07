@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expo Udlap</title>
+    
+    <style>
+        img {
+            width: 240px;
+            height: auto;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-image: url('Fondo.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.6);
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            width: 260px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            z-index: 3;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            font-size: 20px;
+            width: 200px;
+            height: 60px;
+            background-color: #30b300;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffb300;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="LCS_UDLAP.jpg"/>
+        <h1>Expo Udlap</h1>
+        <button id="comboButton" onclick="generateCombination()">Posiciones</button>
+    </div>
+
+    <script>
+        const combinations = [
+            "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10",
+            "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10",
+            "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10",
+            "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10"
+        ];
+    
+        // Crear un objeto para rastrear cuántas veces se selecciona cada combinación
+        const combinationCount = {};
+        combinations.forEach(combination => {
+            combinationCount[combination] = 0;
+        });
+    
+        // Variable para contar cuántas combinaciones totales se han generado
+        let totalCombinationsGenerated = 0;
+        const minCombinations = 8;
+        const maxCombinations = 15;
+    
+        // Generar un número aleatorio entre minCombinations y maxCombinations para definir el límite
+        const totalCombinationsLimit = Math.floor(Math.random() * (maxCombinations - minCombinations + 1)) + minCombinations;
+    
+        function generateCombination() {
+            let randomCombination;
+            let randomIndex;
+    
+            // Verificar si el total de combinaciones generadas ha alcanzado el límite definido
+            if (totalCombinationsGenerated >= totalCombinationsLimit) {
+                document.getElementById("comboButton").textContent = "¡Límite alcanzado!";
+                return;
+            }
+    
+            // Seleccionar una combinación aleatoria
+            randomIndex = Math.floor(Math.random() * combinations.length);
+            randomCombination = combinations[randomIndex];
+    
+            // Aumentar el contador total de combinaciones generadas
+            totalCombinationsGenerated++;
+    
+            // Actualizar el texto del botón con la combinación generada
+            document.getElementById("comboButton").textContent = randomCombination;
+        }
+    </script>
+    
+</body>
+</html>
